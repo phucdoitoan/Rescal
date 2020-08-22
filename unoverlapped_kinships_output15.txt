@@ -1,0 +1,22 @@
+K1: (52, 52, 26)
+K2: (52, 52, 26)
+	 ***** Alpha = 0, Rank = 15 *****
+	      run in 8.47 s
+AUC-PR Test 1: Mean : 0.830260 / Std : 0.022749
+AUC-PR Test 2: Mean : 0.835455 / Std : 0.019205
+	 ***** Alpha = 5, Rank = 15 *****
+	      run in 29.51 s
+AUC-PR Test 1: Mean : 0.832516 / Std : 0.029119
+AUC-PR Test 2: Mean : 0.844134 / Std : 0.020741
+	 ***** Alpha = 10, Rank = 15 *****
+	      run in 15.03 s
+AUC-PR Test 1: Mean : 0.824924 / Std : 0.017697
+AUC-PR Test 2: Mean : 0.836438 / Std : 0.026572
+	 ***** Alpha = 15, Rank = 15 *****
+	      run in 38.33 s
+AUC-PR Test 1: Mean : 0.779665 / Std : 0.033726
+AUC-PR Test 2: Mean : 0.811346 / Std : 0.024803
+	 ***** Alpha = 20, Rank = 15 *****
+	      run in 53.57 s
+AUC-PR Test 1: Mean : 0.654611 / Std : 0.031736
+AUC-PR Test 2: Mean : 0.821083 / Std : 0.010292
