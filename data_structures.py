@@ -82,6 +82,21 @@ class KnowledgeGraph(Dataset):
         else:
             raise Exception('At least one of the arguments df and kg must not be None: df-%s kg-%s ' %(df, kg))
 
+        # initialize dict_of_tails and dict_of_heads
+        self.dict_of_tails = {}
+        self.dict_of_heads = {}
+
+        for i in range(self.n_facts):
+            if (self.head_idx[i], self.relations[i]) in self.dict_of_tails.keys():
+                self.dict_of_tails[self.head_idx[i], self.relations[i]].append(self.tail_idx[i])
+            else:
+                self.dict_of_tails[self.head_idx[i], self.relations[i]] = {}
+
+            if (self.tail_idx[i], self.relations[i]) in self.dict_of_heads.keys():
+                self.dict_of_heads[self.tail_idx[i], self.relations[i]].append(self.head_idx[i])
+            else:
+                self.dict_of_heads[self.tail_idx[i], self.relations[i]] = {}
+
     def __len__(self):
         return self.n_facts
 

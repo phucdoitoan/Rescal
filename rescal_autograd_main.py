@@ -45,7 +45,7 @@ def main():
     # NOTE: need to have a same ent2id and rel2id for all train, valid, test kg
 
     # load kinship dataset
-    kinship_df = pd.read_csv('data/filtered_kinship.txt', delimiter='\t', header=None, names=['head', 'rel', 'tail'])
+    kinship_df = pd.read_csv('data/filtered_uml.txt', delimiter='\t', header=None, names=['head', 'rel', 'tail'])
     kinship_kg = KnowledgeGraph(df=kinship_df)
 
     #train_kg, test_kg = kinship_kg.split_kg(size=(0.9,))
@@ -62,8 +62,9 @@ def main():
     n_epochs = 50 #1000
     b_size = 100 #10000 #32768
 
-    alpha = 0 #10
+    alpha = 10 #0 #10
 
+    print('alpha: ', alpha)
     print('emb_dim: ', emb_dim)
 
     # define model and criterion
@@ -102,9 +103,9 @@ def main():
             'Epoch %s | mean loss: %.5f' %(epoch + 1, running_loss / len(dataloader))
         )
 
-    model.normalize_parameters()
+    #model.normalize_parameters()
 
-    with open('data/filtered_kinship_test.pkl', 'rb') as file:
+    with open('data/filtered_uml_test.pkl', 'rb') as file:
         test_dict = pickle.load(file)
 
     test_heads = test_dict['head']
