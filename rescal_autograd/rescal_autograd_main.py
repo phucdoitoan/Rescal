@@ -90,9 +90,10 @@ def main():
 
             optimizer.zero_grad()
 
-            pos, neg, pos_regul, neg_regul = model(h, t, n_h, n_t, r)
+            #pos, neg, pos_regul, neg_regul = model(h, t, n_h, n_t, r)
+            pos, neg, *_ = model(h, t, n_h, n_t, r)
 
-            loss = criterion(pos, neg, torch.ones_like(pos)) + alpha * (pos_regul + neg_regul) / 2
+            loss = criterion(pos, neg, torch.ones_like(pos)) #+ alpha * (pos_regul + neg_regul) / 2
 
             loss.backward()
             optimizer.step()
