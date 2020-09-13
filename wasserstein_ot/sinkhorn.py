@@ -29,7 +29,7 @@ class SinkhornDistance(nn.Module):
         self.reduction = reduction
         self.device = device
 
-    def forward(self, x, y, mu, nu):
+    def forward(self, x, y, mu=None, nu=None):
         """
         mu: (batch_size, x_points) weight distributions of points in x
         nu: (batch_size, y_points) wieght distributions of points in y
@@ -48,6 +48,11 @@ class SinkhornDistance(nn.Module):
         #                 requires_grad=False).fill_(1.0 / x_points).squeeze().to(self.device)
         #nu = torch.empty(batch_size, y_points, dtype=torch.float,
         #                 requires_grad=False).fill_(1.0 / y_points).squeeze().to(self.device)
+
+        if mu is None:
+            mu = torch.ones(x_points) / x_points
+        if nu is None:
+            nu = torch.ones(y_points) / y_points
 
         mu = mu.to(self.device)
         nu = nu.to(self.device)

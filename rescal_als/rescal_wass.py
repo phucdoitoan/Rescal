@@ -5,7 +5,7 @@ This is based on the codes published by rescal author
 import numpy as np
 from scipy import sparse
 import torch
-from sinkhorn import SinkhornDistance
+from wasserstein_ot import SinkhornDistance
 from time import time
 
 
@@ -74,7 +74,7 @@ def als_wass(X1, X2, rank, alpha=5, conv=1e-4, maxIter=500, lmbdaA1=10, lmbdaA2=
         A1 = updateA_rescal(X1, A1, R1, lmbdaA1) + alpha * updateA_wass(A1, A2, P)
         A2 = updateA_rescal(X2, A2, R2, lmbdaA2) + alpha * updateA_wass(A2, A1_old, P.T)
 
-        P = updateP(A1, A2, sinkhorn) # update P with sinkhorn
+        P = updateP(A1, A2, sinkhorn) # update P with wasserstein_ot
 
         # update R1, R2
         R1 = updateR(X1, A1, lmbdaR1)
@@ -150,7 +150,7 @@ def updateA_wass(A, otherA, P):
     Args:
         A: latent representation of one tensor, n1 x rank
         otherA: latent representation of other tensor, n2 x rank
-        P: optimal transport plan between the entities in the 1st tensor to the 2nd tensor,
+        P: wasserstein_ot plan between the entities in the 1st tensor to the 2nd tensor,
            transport cost defined as the Euclidiean distance between the rows
 
     Returns:
@@ -166,13 +166,13 @@ def updateA_wass(A, otherA, P):
 # <================= need to implement in a same platform, all in torch or all in numpy
 def updateP(A1, A2, sinkhorn=SinkhornDistance(eps=0.1, max_iter=50, device='cpu')):
     """
-    Update optimal transport P between the entities of the two tensors
+    Update wasserstein_ot P between the entities of the two tensors
     Args:
         A1: latent representation of the entities in the 1st tensor
         A2: latent representation of the entities in the 2nd tensor
 
     Returns:
-        updated optimal transport plan P
+        updated wasserstein_ot plan P
     """
     n1 = A1.shape[0]
     n2 = A2.shape[0]

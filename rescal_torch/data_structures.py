@@ -87,15 +87,15 @@ class KnowledgeGraph(Dataset):
         self.dict_of_heads = {}
 
         for i in range(self.n_facts):
-            if (self.head_idx[i], self.relations[i]) in self.dict_of_tails.keys():
-                self.dict_of_tails[self.head_idx[i], self.relations[i]].append(self.tail_idx[i])
+            if (self.head_idx[i].item(), self.relations[i].item()) in self.dict_of_tails.keys():
+                self.dict_of_tails[self.head_idx[i].item(), self.relations[i].item()].append(self.tail_idx[i].item())
             else:
-                self.dict_of_tails[self.head_idx[i], self.relations[i]] = {}
+                self.dict_of_tails[self.head_idx[i].item(), self.relations[i].item()] = [self.tail_idx[i].item()]
 
-            if (self.tail_idx[i], self.relations[i]) in self.dict_of_heads.keys():
-                self.dict_of_heads[self.tail_idx[i], self.relations[i]].append(self.head_idx[i])
+            if (self.tail_idx[i].item(), self.relations[i].item()) in self.dict_of_heads.keys():
+                self.dict_of_heads[self.tail_idx[i].item(), self.relations[i].item()].append(self.head_idx[i].item())
             else:
-                self.dict_of_heads[self.tail_idx[i], self.relations[i]] = {}
+                self.dict_of_heads[self.tail_idx[i].item(), self.relations[i].item()] = [self.head_idx[i].item()]
 
     def __len__(self):
         return self.n_facts

@@ -6,7 +6,7 @@ from torch.optim import Adagrad
 from torch.utils.data import DataLoader
 import pandas as pd
 from data_structures import KnowledgeGraph
-from rescal_autograd import Rescal, UniformNegativeSampler
+from rescal_torch import Rescal, UniformNegativeSampler
 from tqdm import tqdm
 
 import pickle
